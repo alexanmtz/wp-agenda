@@ -17,8 +17,6 @@ var DateConvert = {
 	toObject: function(date) {
 		var dateArray = date.split('/');
 		var DateObject = new Date(dateArray[2], dateArray[1]-1, dateArray[0]);
-		console.info(DateObject.toString());
-		console.info(dateArray);
 		return DateObject;
 	}
 }
@@ -51,7 +49,6 @@ if (loading) {
 				dataType: 'json',
 				data: {action: 'agenda_events'},
 				success: function(results) {
-					console.info(results);
 					events = [];
 					for (result in results) {
 						events.push({
@@ -62,7 +59,6 @@ if (loading) {
 						});
 	
 					}
-					console.info(events);
 					callback(events);
 				},
 				complete: function(xhr, message) {
