@@ -12,6 +12,8 @@ define('PLUGIN_PATH', WP_PLUGIN_URL."/wp-agenda");
 
 class WPAgenda {
 	
+	var $name = 'WPAgenda';
+	
 	function __construct() {
 		$this->register_admin_scripts();
 		$this->register_public_scripts();
@@ -45,7 +47,7 @@ class WPAgenda {
 		add_action('init',array($this,"register_public_scripts"));
 		add_action('init',array($this,"install"));
 		add_action('admin_init', array($this, 'print_boxes'));
-		add_action('save_post', array($this, 'save_metadata'));	
+		add_action('save_post', array($this, 'save_metadata'));
 	}
 
 
@@ -68,7 +70,7 @@ class WPAgenda {
   		);
 		
 		
-		register_post_type('WPAgenda',array(
+		register_post_type($this->name,array(
 		    'label' => 'Agenda',
 		    'public' => true,
 		    'publicly_queryable' => true,
@@ -91,17 +93,23 @@ class WPAgenda {
 	function print_date_box() {
 		global $post;
 		$post_id = $post->ID;
+		$start_date = get_post_meta($post_id, 'start-date', true);
+		$end_date = get_post_meta($post_id, 'end-date', true);
+		$start_time = get_post_meta($post_id, 'start-time', true);
+		$end_time = get_post_meta($post_id, 'end-time', true);
+		
 		echo '<fieldset>';
 		echo '<label for="start-date">' . __("Começa em:", 'WPAgenda' ) . '</label> ';
-  		echo '<input class="date" type="text" id="start-date" name="start-date" value="'.get_post_meta($post_id,'start-date', true).'" size="25" />';
-  		echo '<label for="start-hour">' . __("Horário de início:", 'WPAgenda' ) . '</label> ';
-  		echo $this->hour_helper('start-hour');
+  		echo '<input class="date" type="text" id="start-date" name="start-date" value="'.$start_date.'" size="25" />';
+  		echo '<label for="start-time">' . __("Horário de início:", 'WPAgenda' ) . '</label> ';
+  		echo '<input type="text" name="start-time" value="'.$start_time.'" />';
   		echo '</fieldset>';
 		echo '<fieldset>';
   		echo '<label for="end-date">' . __("Termina em:", 'WPAgenda' ) . '</label> ';
-  		echo '<input class="date" type="text" id="end-date" name="end-date" value="'.get_post_meta($post_id,'end-date', true).'" size="25" />';
-  		echo '<label for="end-hour">' . __("Horário de Término:", 'WPAgenda' ) . '</label> ';
-  		echo $this->hour_helper('end-hour');
+  		echo '<input class="date" type="text" id="end-date" name="end-date" value="'.$end_date.'" size="25" />';
+  		echo '<label for="end-time">' . __("Horário de Término:", 'WPAgenda' ) . '</label> ';
+  		echo '<input type="text" name="end-time" value="'.$end_time.'" />';
+  		echo '';
   		echo '</fieldset>';
   		
 	}
@@ -109,43 +117,23 @@ class WPAgenda {
 	function print_local_box() {
 		global $post;
 		$post_id = $post->ID;
-		$bah = get_post_meta($post_id, 'local');
-		print_r($bah);
+		$local = get_post_meta($post_id, 'local', true);
 		echo '<label for="local">' . __("Endereço do evento:", 'WPAgenda' ) . '</label> ';
-  		echo '<textarea class="local" value="'.get_post_meta($post_id, 'local', true).'" type="text" id="local" name="local"></textarea>';
+  		echo '<textarea class="local" type="text" id="local" name="local">'.$local.'</textarea>';
 	}
 	
 	function save_metadata($id) {
 		$metadata = Array();
 		$metadata['start-date'] = $_POST['start-date'];
-		$metadata['start-hour'] = $_POST['start-hour'];
+		$metadata['start-time'] = $_POST['start-time'];
 		$metadata['end-date'] = $_POST['end-date'];
-		$metadata['end-hour'] = $_POST['end-hour'];
+		$metadata['end-time'] = $_POST['end-time'];
 		$metadata['local'] = $_POST['local'];
-		
 		foreach($metadata as $key => $data) {
-			add_post_meta($id, $key, $key[$data]);
+			update_post_meta($id, $key, $data);
 		}
 		
 		return $metadata;
-	}
-	
-	private function hour_helper($name) {
-		global $post;
-		$post_id = $post->ID; 
-		$tag = '<select name="'.$name.'">';
-		for($i=0;$i<=23;$i++) {
-			$selected = $i==get_post_meta($post_id, $name, true) ? 'selected="selected"' : '';
-			$tag .=  '<option '.$selected.' value="'.$i.'">'.$i.'</option>';
-  		}
-  		$tag.= '</select>';
-  		$tag.= '<select name="'.$name.'">';
-  		for($i=0;$i<60;$i+=10) {
-			$selected = $i==get_post_meta($post_id, $name, true) ? 'selected="selected"' : '';
-			$tag .= '<option '.$selected.' value="'.$i.'">'.$i.'</option>';
-  		}
-  		$tag.= '</select>';
-  		return $tag;
 	}
 	
 }
