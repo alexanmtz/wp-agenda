@@ -18,6 +18,7 @@ class Agenda {
 		$this->register_admin_scripts();
 		$this->register_public_scripts();
 		$this->register_actions();
+		$this->register_ajax_actions();
 	}
 
 	function register_admin_scripts() {
@@ -49,6 +50,8 @@ class Agenda {
 		add_action('admin_init', array($this, 'print_boxes'));
 		add_action('save_post', array($this, 'save_metadata'));
 		
+		add_action('wp_print_scripts', array($this,'generate_javascript_object'));
+		
 		/* reescrevendo url */
 		add_action('generate_rewrite_rules', array($this,'agenda_add_rewrite_rules'));
 		/* aplicando urls */
@@ -58,8 +61,31 @@ class Agenda {
 		/* passando variaveis para o loop de agenda */
 		add_filter('query_vars', array($this,'agenda_queryvars'));
 	}
-
-
+	
+	function generate_javascript_object() {
+		if(!is_admin()) {
+			echo '<script type="text/javascript">';
+			echo 'var ajaxurl = "'.site_url('/wp-admin/admin-ajax.php";');
+			echo '</script>';
+		}
+	}
+	
+	function register_ajax_actions() {
+		add_action('wp_ajax_nopriv_agenda_events', array($this,'get_agenda_events'));
+	}
+	
+	function get_agenda_events() {
+		global $wpdb;
+		$events = get_posts(array('post_type'=>'agenda', 'numberposts' => -1), ARRAY_A);
+		
+		foreach($events as $event) {
+			$event->start = get_post_meta($event->ID, 'start-date');
+		}
+		$json = json_encode($events);
+		echo $json;
+		die();
+	}
+	
 	function install() {
 
 		$labels = array(
@@ -106,7 +132,7 @@ class Agenda {
 		$end_date = get_post_meta($post_id, 'end-date', true);
 		$start_time = get_post_meta($post_id, 'start-time', true);
 		$end_time = get_post_meta($post_id, 'end-time', true);
-
+		
 		echo '<fieldset>';
 		echo '<label for="start-date">' . __("Começa em:", 'agenda' ) . '</label> ';
 		echo '<input class="date" type="text" id="start-date" name="start-date" value="'.$start_date.'" size="25" />';
@@ -134,6 +160,12 @@ class Agenda {
 	}
 
 	function save_metadata($id) {
+		
+		if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+    		return $postID;
+		}
+		
+		
 		$metadata = Array();
 		$metadata['start-date'] = $_POST['start-date'];
 		$metadata['start-time'] = $_POST['start-time'];
@@ -149,7 +181,7 @@ class Agenda {
 
 	function agenda_add_rewrite_rules($wp_rewrite) {
 		$new_rules = array(
- 	'agenda/?$' => 'index.php?agenda');
+ 	'agenda/?$' => 'index.php?agenda=all');
 
 		$wp_rewrite->rules = $new_rules + $wp_rewrite->rules;
 	}
@@ -161,19 +193,12 @@ class Agenda {
 
 	function agenda_templates() {
 
-		if ( $_GET['agenda'] ) {
+		if ( $_GET['agenda']== 'all' ) {
 			if (file_exists(TEMPLATEPATH . '/agenda.php')) {
 				include(TEMPLATEPATH . '/agenda.php');
 				exit;
-			} else {
-				include(TEMPLATEPATH . '/index.php');
-				exit;
-			}
-		} else {
-
-
+			} 
 		}
-
 	}
 
 	function agenda_queryvars($qvars) {
