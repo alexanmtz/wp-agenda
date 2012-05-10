@@ -29,8 +29,8 @@ class Agenda {
     wp_enqueue_script('jquery-ui-dialog');
     wp_enqueue_script( 'form');
 		wp_enqueue_script('jgrowl', PLUGIN_PATH.'/js/jquery.jgrowl_compressed.js', array('jquery'));
-		wp_enqueue_script('datepicker-i18n', PLUGIN_PATH.'/js/jquery.ui.datepicker-pt-BR.js', array('jquery'));
 		wp_enqueue_script('jquery-ui-datepicker', PLUGIN_PATH.'/js/jquery.ui.datepicker.js', array('jquery','jquery-ui-core'));
+		//wp_enqueue_script('datepicker-i18n', PLUGIN_PATH.'/js/jquery.ui.datepicker-pt-BR.js', array('jquery'));
 		wp_enqueue_script( 'dateformat', PLUGIN_PATH.'/js/dateformat.js');
 		wp_enqueue_script( 'blockui', PLUGIN_PATH.'/js/jquery.blockui.js', array('jquery'));
 		wp_enqueue_script( 'validate', PLUGIN_PATH.'/js/jquery.validate.min.js', array('jquery'));
