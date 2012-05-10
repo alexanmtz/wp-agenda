@@ -42,7 +42,7 @@ class Agenda {
 		wp_enqueue_style( 'fullcalendar', PLUGIN_PATH.'/css/fullcalendar.css');
 		wp_enqueue_style('tooltip', PLUGIN_PATH.'/css/jquery.tooltip.css');
 		wp_enqueue_style('public', PLUGIN_PATH.'/css/style_public.css');
-		
+		wp_enqueue_script( 'blockui', PLUGIN_PATH.'/js/jquery.blockui.js', array('jquery'));
 		wp_enqueue_script('jgrowl', PLUGIN_PATH.'/js/jquery.jgrowl_compressed.js', array('jquery'));
 		wp_enqueue_script('tooltip', PLUGIN_PATH.'/js/jquery.tooltip.pack.js', array('jquery'));
 		wp_enqueue_script( 'fullcalendar', PLUGIN_PATH.'/js/fullcalendar.js', array('jquery','jquery-ui-core','jquery-ui-draggable','jquery-ui-resizable','tooltip'));

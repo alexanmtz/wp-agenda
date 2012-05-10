@@ -3,13 +3,20 @@
  * 
  */
 
+.loading {
+	display: inline-block;
+	width: 80px;
+	heith: 30px;
+	text-align: center;
+}
+
 .fc-event a {
-  background-color: #3e7341;
+  background-color: white;
   color: white;
 }
 
 .fc-event a:hover {
-  background-color: #508F53;
+  background-color: #D7DDD9;
   color: white;
 }
 
@@ -21,4 +28,4 @@
    float: left;
    margin: 0 20px 20px 0;
    display: block;
- }
+}

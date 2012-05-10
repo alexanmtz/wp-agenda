@@ -34,7 +34,7 @@ jQuery(document).ready(function() {
 		loading: function(loading){
     if (loading) {
 				jQuery.blockUI({
-					message: 'Carregando eventos...'
+					message: 'loading...'
 				});
 			}
 			else {
