@@ -40,14 +40,14 @@ class Agenda {
 
 	function register_public_scripts() {
 		wp_enqueue_style( 'fullcalendar', PLUGIN_PATH.'/css/fullcalendar.css');
-		wp_enqueue_style('jgrowl', PLUGIN_PATH.'/css/jquery.jgrowl.css');
+		wp_enqueue_style('tooltip', PLUGIN_PATH.'/css/jquery.tooltip.css');
 		wp_enqueue_style('public', PLUGIN_PATH.'/css/style_public.css');
 		
 		wp_enqueue_script('jgrowl', PLUGIN_PATH.'/js/jquery.jgrowl_compressed.js', array('jquery'));
-		wp_enqueue_script('qtip', PLUGIN_PATH.'/js/jquery.qtip-1.0.0-rc3.min.js', array('jquery'));
-		wp_enqueue_script( 'fullcalendar', PLUGIN_PATH.'/js/fullcalendar.js', array('jquery','jquery-ui-core','jquery-ui-draggable','jquery-ui-resizable','qtip'));
+		wp_enqueue_script('tooltip', PLUGIN_PATH.'/js/jquery.tooltip.pack.js', array('jquery'));
+		wp_enqueue_script( 'fullcalendar', PLUGIN_PATH.'/js/fullcalendar.js', array('jquery','jquery-ui-core','jquery-ui-draggable','jquery-ui-resizable','tooltip'));
 		wp_enqueue_script( 'agenda-locale', PLUGIN_PATH.'/js/agenda-locale.js', array('fullcalendar'));
-		wp_enqueue_script( 'agenda_main', PLUGIN_PATH.'/js/agenda_main.js', array('fullcalendar', 'qtip'));
+		wp_enqueue_script( 'agenda_main', PLUGIN_PATH.'/js/agenda_main.js', array('fullcalendar', 'tooltip'));
 	}
 	function register_actions() {
 		add_action('admin_init', array($this,"register_admin_scripts"));
@@ -91,7 +91,7 @@ class Agenda {
 			$event->end_date = get_post_meta($event->ID, 'end-date');
 			$event->start_time = get_post_meta($event->ID, 'start-time');
 			$event->end_time = get_post_meta($event->ID, 'end-time');
-			$event->thumbnail = get_the_post_thumbnail( $event->ID, 'thumbnail' );
+			$event->thumbnail = get_the_post_thumbnail( $event->ID, array(100,100) );
 		}
 		$json = json_encode($events);
 		echo $json;

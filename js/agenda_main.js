@@ -22,7 +22,8 @@ var DateConvert = {
 }
 
 jQuery(document).ready(function() {
-	jQuery('#wp-agenda-calendar').fullCalendar({
+	
+  jQuery('#wp-agenda-calendar').fullCalendar({
 		monthNames: agenda_locale.monthNames,
 		monthNamesShort: agenda_locale.monthNamesShort,
 		dayNames: agenda_locale.dayNames,
@@ -78,15 +79,10 @@ jQuery(document).ready(function() {
 			var html = '<h3>'+event.title+'</h3>';
       html += '<div class="wp-agenda-tooltip-image">' + event.thumbnail + '</div>';
       html += '<p>'+event.content+'</p>';
-      jQuery(this).find('a').qtip({
-         content: 'bla', // Give it some content
-         position: 'topRight', // Set its position
-         hide: {
-            fixed: true // Make it fixed so it can be hovered over
-         },
-         style: {
-            padding: '5px 15px', // Give it some extra padding
-            name: 'dark' // And style it with the preset dark theme
+      
+      jQuery(this).tooltip({
+         bodyHandler: function() {
+            return html;
          }
       });
 
