@@ -15,7 +15,6 @@ class Agenda {
 	var $name = 'agenda';
 
 	function __construct() {
-
 		$this->register_public_scripts();
 		$this->register_actions();
 		$this->register_ajax_actions();
