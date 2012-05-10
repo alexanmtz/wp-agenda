@@ -74,7 +74,6 @@ if (loading) {
 			
 		},
 		eventMouseover: function(event, jsEvent, view) {
-			console.info($(this).find('a'));
 			$(this).find('a').tooltip({
 				bodyHandler: function() {
 					return event.title
