@@ -43,6 +43,7 @@ if (loading) {
 			}
 */
 		},
+		className: 'the-event',
 		events: function(start, end, callback) {
 			var date_results = [];
 			jQuery.ajax({
@@ -56,6 +57,7 @@ if (loading) {
 							id : results[result]['ID'],
 							title : results[result]['post_title'],
 							url : results[result]['guid'],
+							content: results[result]['post_content'],
 							start: DateConvert.toObject(results[result]['start_date'][0], results[result]['start_time'][0]),
 							end: DateConvert.toObject(results[result]['end_date'][0], results[result]['end_time'][0]),
 							allDay: false							
@@ -74,11 +76,15 @@ if (loading) {
 			
 		},
 		eventMouseover: function(event, jsEvent, view) {
-			$(this).find('a').tooltip({
+			jQuery(this).find('a').tooltip({
 				bodyHandler: function() {
-					return event.title
-				}
+					content = '<h3>'+event.title+'</h3>';
+					content += '<p>' + event.content + '</p>';
+					return content;
+				},
+				showURL: false
 			});
+
 		}
 	});
 });
