@@ -44,6 +44,7 @@ if (loading) {
 */
 		},
 		className: 'the-event',
+    timeFormat: 'H(:mm)',
 		events: function(start, end, callback) {
 			var date_results = [];
 			jQuery.ajax({
