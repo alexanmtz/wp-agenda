@@ -1,33 +1,9 @@
-#agenda-adicionar label, #agenda-adicionar fieldset legend {
+#wp-agenda-date label, #wp-agenda-local {
 	font-weight: bold;
-}
-
-#agenda-adicionar input,#agenda-adicionar textarea {
-	width: 100%;
-}
-#agenda-adicionar textarea {
-	height: 100px;
-}
-
-#agenda-adicionar .tip {
-	color: gray;
-	font-size: 10px;
-}
-
-#agenda-adicionar fieldset legend {
-	padding: 0 5px;
-}
-
-#agenda-adicionar fieldset {
+	display: block;
 	margin: 10px 0;
-	border: 1px solid #AFAFAF;
-	padding: 15px;
 }
 
-#agenda-calendario {
-	margin-top: 50px;
-}
-
-#agenda-calendario a:hover {
-	color: white;
+#wp-agenda-local textarea {
+	display: block;
 }
