@@ -12,7 +12,6 @@
  *   http://www.gnu.org/licenses/gpl.html
  *
  */
-
 var DateConvert = {
 	toObject: function(date, time) {
 		var dateArray = date.split('/');
@@ -32,16 +31,14 @@ jQuery(document).ready(function() {
 		buttonText: agenda_locale.buttonText,
 		editable: false,
 		loading: function(loading){
-			/*
-if (loading) {
+    if (loading) {
 				jQuery.blockUI({
-					message: 'Carregando agenda...'
+					message: 'Carregando eventos...'
 				});
 			}
 			else {
 				jQuery.unblockUI();
 			}
-*/
 		},
 		className: 'the-event',
     timeFormat: 'H(:mm)',
@@ -53,22 +50,23 @@ if (loading) {
 				data: {action: 'agenda_events'},
 				success: function(results) {
 					events = [];
-					for (result in results) {
+          for (result in results) {
 						events.push({
 							id : results[result]['ID'],
 							title : results[result]['post_title'],
 							url : results[result]['guid'],
-							content: results[result]['post_content'],
+							content: results[result]['post_excerpt'],
 							start: DateConvert.toObject(results[result]['start_date'][0], results[result]['start_time'][0]),
 							end: DateConvert.toObject(results[result]['end_date'][0], results[result]['end_time'][0]),
+              thumbnail: results[result]['thumbnail'],
 							allDay: false							
 						});
 	
 					}
 					callback(events);
+         
 				},
 				complete: function(xhr, message) {
-					
 				},
 				error: function(xhr, type, e) {
 					console.info(type);
@@ -77,14 +75,20 @@ if (loading) {
 			
 		},
 		eventMouseover: function(event, jsEvent, view) {
-			jQuery(this).find('a').tooltip({
-				bodyHandler: function() {
-					content = '<h3>'+event.title+'</h3>';
-					content += '<p>' + event.content + '</p>';
-					return content;
-				},
-				showURL: false
-			});
+			var html = '<h3>'+event.title+'</h3>';
+      html += '<div class="wp-agenda-tooltip-image">' + event.thumbnail + '</div>';
+      html += '<p>'+event.content+'</p>';
+      jQuery(this).find('a').qtip({
+         content: 'bla', // Give it some content
+         position: 'topRight', // Set its position
+         hide: {
+            fixed: true // Make it fixed so it can be hovered over
+         },
+         style: {
+            padding: '5px 15px', // Give it some extra padding
+            name: 'dark' // And style it with the preset dark theme
+         }
+      });
 
 		}
 	});

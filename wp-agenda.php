@@ -22,28 +22,32 @@ class Agenda {
 	}
 
 	function register_admin_scripts() {
-		wp_enqueue_script('jquery-ui-dialog');
+		
 		wp_enqueue_style('jquery-ui', PLUGIN_PATH.'/css/jquery-ui-1.7.2.custom.css');
-		wp_enqueue_script( 'form');
 		wp_enqueue_style('jgrowl', PLUGIN_PATH.'/css/jquery.jgrowl.css');
+		wp_enqueue_style( 'admin_agenda',PLUGIN_PATH.'/css/style_admin.css');
+		
+    wp_enqueue_script('jquery-ui-dialog');
+    wp_enqueue_script( 'form');
 		wp_enqueue_script('jgrowl', PLUGIN_PATH.'/js/jquery.jgrowl_compressed.js', array('jquery'));
 		wp_enqueue_script('datepicker-i18n', PLUGIN_PATH.'/js/jquery.ui.datepicker-pt-BR.js', array('jquery'));
 		wp_enqueue_script('jquery-ui-datepicker', PLUGIN_PATH.'/js/jquery.ui.datepicker.js', array('jquery','jquery-ui-core'));
 		wp_enqueue_script( 'dateformat', PLUGIN_PATH.'/js/dateformat.js');
+		wp_enqueue_script( 'blockui', PLUGIN_PATH.'/js/jquery.blockui.js', array('jquery'));
 		wp_enqueue_script( 'validate', PLUGIN_PATH.'/js/jquery.validate.min.js', array('jquery'));
 		wp_enqueue_script( 'agenda', PLUGIN_PATH.'/js/agenda_admin.js', array('fullcalendar','jquery-ui-dialog'));
-		wp_enqueue_style( 'admin_agenda',PLUGIN_PATH.'/css/style_admin.css');
 	}
 
 	function register_public_scripts() {
 		wp_enqueue_style( 'fullcalendar', PLUGIN_PATH.'/css/fullcalendar.css');
-		wp_enqueue_style( 'tooltip', PLUGIN_PATH.'/css/jquery.tooltip.css');
 		wp_enqueue_style('jgrowl', PLUGIN_PATH.'/css/jquery.jgrowl.css');
+		wp_enqueue_style('public', PLUGIN_PATH.'/css/style_public.css');
+		
 		wp_enqueue_script('jgrowl', PLUGIN_PATH.'/js/jquery.jgrowl_compressed.js', array('jquery'));
-		wp_enqueue_script('tooltip', PLUGIN_PATH.'/js/jquery.tooltip.pack.js', array('jquery'));
-		wp_enqueue_script( 'fullcalendar', PLUGIN_PATH.'/js/fullcalendar.js', array('jquery','jquery-ui-core','jquery-ui-draggable','jquery-ui-resizable','tooltip'));
+		wp_enqueue_script('qtip', PLUGIN_PATH.'/js/jquery.qtip-1.0.0-rc3.min.js', array('jquery'));
+		wp_enqueue_script( 'fullcalendar', PLUGIN_PATH.'/js/fullcalendar.js', array('jquery','jquery-ui-core','jquery-ui-draggable','jquery-ui-resizable','qtip'));
 		wp_enqueue_script( 'agenda-locale', PLUGIN_PATH.'/js/agenda-locale.js', array('fullcalendar'));
-		wp_enqueue_script( 'agenda_main', PLUGIN_PATH.'/js/agenda_main.js', array('fullcalendar', 'tooltip'));
+		wp_enqueue_script( 'agenda_main', PLUGIN_PATH.'/js/agenda_main.js', array('fullcalendar', 'qtip'));
 	}
 	function register_actions() {
 		add_action('admin_init', array($this,"register_admin_scripts"));
@@ -77,6 +81,7 @@ class Agenda {
 		add_action('wp_ajax_agenda_events', array($this,'get_agenda_events'));
 	}
 	
+	
 	function get_agenda_events() {
 		global $wpdb;
 		$events = get_posts(array('post_type'=>'agenda', 'numberposts' => -1), ARRAY_A);
@@ -86,6 +91,7 @@ class Agenda {
 			$event->end_date = get_post_meta($event->ID, 'end-date');
 			$event->start_time = get_post_meta($event->ID, 'start-time');
 			$event->end_time = get_post_meta($event->ID, 'end-time');
+			$event->thumbnail = get_the_post_thumbnail( $event->ID, 'thumbnail' );
 		}
 		$json = json_encode($events);
 		echo $json;
@@ -99,9 +105,9 @@ class Agenda {
 		    'singular_name' => __('Agenda', 'Evento'),
 		    'add_new' => __('Adicionar novo', 'Evento'),
 		    'add_new_item' => __('Adicionar novo evento'),
-		    'edit_item' => __('Editar Agenda'),
-		    'new_item' => __('Nova Agenda'),
-		    'view_item' => __('Ver Agenda'),
+		    'edit_item' => __('Editar Evento'),
+		    'new_item' => __('Novo Evento'),
+		    'view_item' => __('Ver Evento'),
 		    'search_items' => __('Buscar Eventos'),
 		    'not_found' =>  __('Nenhum evento encontrado'),
 		    'not_found_in_trash' => __('Nenhum evento na lixeira'), 
@@ -115,7 +121,8 @@ class Agenda {
 		    'label' => 'Agenda',
 		    'public' => true,
 		    'publicly_queryable' => true,
-		    'show_ui' => true, 
+		    'show_ui' => true,
+		    'taxonomies' => array( 'post_tag'), 
 		    'show_in_menu' => true, 
 		    'query_var' => true,
 		    'rewrite' => true,

@@ -1,0 +1,9 @@
+/*
+ * Stylesheets for public area of agenda plugin
+ * 
+ */
+
+.wp-agenda-tooltip-image {
+   float: left;
+   margin: 0 10px 10px;
+ }
