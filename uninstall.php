@@ -1,7 +1,7 @@
 <?php 
 global $wpdb;
 global $wp_rewrite;
-remove_post_type_support('WPAgenda');
+remove_post_type_support('agenda');
 
 $WPAgenda_delete_query  = "
     DELETE wposts.* 
@@ -10,7 +10,7 @@ $WPAgenda_delete_query  = "
     AND wpostmeta.meta_key = 'tag' 
     AND wpostmeta.meta_value = 'email' 
     AND wposts.post_status = 'publish' 
-    AND wposts.post_type = 'WPAgenda' 
+    AND wposts.post_type = 'agenda' 
     ORDER BY wposts.post_date DESC
  ";
 

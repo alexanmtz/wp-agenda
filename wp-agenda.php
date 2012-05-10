@@ -10,9 +10,9 @@
 
 define('PLUGIN_PATH', WP_PLUGIN_URL."/wp-agenda");
 
-class WPAgenda {
+class Agenda {
 
-	var $name = 'WPAgenda';
+	var $name = 'agenda';
 
 	function __construct() {
 		$this->register_admin_scripts();
@@ -149,13 +149,9 @@ class WPAgenda {
 
 	function agenda_add_rewrite_rules($wp_rewrite) {
 		$new_rules = array(
- 	'agenda/(.+?)/?$' => 'index.php?agenda=' .
-		$wp_rewrite->preg_index(1) );
+ 	'agenda/?$' => 'index.php?agenda');
 
-		$new_rules2 = array(
- 	'agenda/?$' => 'index.php?agenda=all');
-
-		$wp_rewrite->rules = $new_rules + $new_rules2 + $wp_rewrite->rules;
+		$wp_rewrite->rules = $new_rules + $wp_rewrite->rules;
 	}
 
 	function agenda_flush_rewrite_rules() {
@@ -181,7 +177,7 @@ class WPAgenda {
 	}
 
 	function agenda_queryvars($qvars) {
-		$qvars[] = 'WPAgenda';
+		$qvars[] = 'agenda';
 		return $qvars;
 	}
 
@@ -189,4 +185,4 @@ class WPAgenda {
 // end WPAgenda Class
 
 
-$agenda = new WPAgenda();
+new Agenda();
