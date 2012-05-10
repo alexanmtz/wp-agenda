@@ -13,5 +13,5 @@
  *
  */
 jQuery(document).ready(function() {
-	//jQuery('#wp-agenda .date').datepicker();
+	jQuery('#wp-agenda-date .date').datepicker();
 });
