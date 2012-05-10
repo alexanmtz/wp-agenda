@@ -14,9 +14,10 @@
  */
 
 var DateConvert = {
-	toObject: function(date) {
+	toObject: function(date, time) {
 		var dateArray = date.split('/');
-		var DateObject = new Date(dateArray[2], dateArray[1]-1, dateArray[0]);
+		var timeArray = time.split(':');
+		var DateObject = new Date(dateArray[2], dateArray[1]-1, dateArray[0], timeArray[0], timeArray[1]);
 		return DateObject;
 	}
 }
@@ -55,7 +56,9 @@ if (loading) {
 							id : results[result]['ID'],
 							title : results[result]['post_title'],
 							url : results[result]['guid'],
-							start: DateConvert.toObject(results[result]['start'][0])							
+							start: DateConvert.toObject(results[result]['start_date'][0], results[result]['start_time'][0]),
+							end: DateConvert.toObject(results[result]['end_date'][0], results[result]['end_time'][0]),
+							allDay: false							
 						});
 	
 					}
@@ -69,6 +72,14 @@ if (loading) {
 				} 
 			});
 			
+		},
+		eventMouseover: function(event, jsEvent, view) {
+			console.info($(this).find('a'));
+			$(this).find('a').tooltip({
+				bodyHandler: function() {
+					return event.title
+				}
+			});
 		}
 	});
 });

@@ -37,8 +37,10 @@ class Agenda {
 
 	function register_public_scripts() {
 		wp_enqueue_style( 'fullcalendar', PLUGIN_PATH.'/css/fullcalendar.css');
+		wp_enqueue_style( 'jquery.tooltip', PLUGIN_PATH.'/css/jquery.tooltip.css');
 		wp_enqueue_style('jgrowl', PLUGIN_PATH.'/css/jquery.jgrowl.css');
 		wp_enqueue_script('jgrowl', PLUGIN_PATH.'/js/jquery.jgrowl_compressed.js', array('jquery'));
+		wp_enqueue_script('tooltip', PLUGIN_PATH.'/js/jquery.tooltip.pack.js', array('jquery'));
 		wp_enqueue_script( 'fullcalendar', PLUGIN_PATH.'/js/fullcalendar.js', array('jquery','jquery-ui-core','jquery-ui-draggable','jquery-ui-resizable'));
 		wp_enqueue_script( 'agenda-locale', PLUGIN_PATH.'/js/agenda-locale.js', array('fullcalendar'));
 		wp_enqueue_script( 'agenda_main', PLUGIN_PATH.'/js/agenda_main.js', array('fullcalendar'));
@@ -72,6 +74,7 @@ class Agenda {
 	
 	function register_ajax_actions() {
 		add_action('wp_ajax_nopriv_agenda_events', array($this,'get_agenda_events'));
+		add_action('wp_ajax_agenda_events', array($this,'get_agenda_events'));
 	}
 	
 	function get_agenda_events() {
@@ -79,7 +82,10 @@ class Agenda {
 		$events = get_posts(array('post_type'=>'agenda', 'numberposts' => -1), ARRAY_A);
 		
 		foreach($events as $event) {
-			$event->start = get_post_meta($event->ID, 'start-date');
+			$event->start_date = get_post_meta($event->ID, 'start-date');
+			$event->end_date = get_post_meta($event->ID, 'end-date');
+			$event->start_time = get_post_meta($event->ID, 'start-time');
+			$event->end_time = get_post_meta($event->ID, 'end-time');
 		}
 		$json = json_encode($events);
 		echo $json;
