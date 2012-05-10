@@ -11,9 +11,9 @@
 define('PLUGIN_PATH', WP_PLUGIN_URL."/wp-agenda");
 
 class WPAgenda {
-	
+
 	var $name = 'WPAgenda';
-	
+
 	function __construct() {
 		$this->register_admin_scripts();
 		$this->register_public_scripts();
@@ -48,11 +48,20 @@ class WPAgenda {
 		add_action('init',array($this,"install"));
 		add_action('admin_init', array($this, 'print_boxes'));
 		add_action('save_post', array($this, 'save_metadata'));
+		
+		/* reescrevendo url */
+		add_action('generate_rewrite_rules', array($this,'agenda_add_rewrite_rules'));
+		/* aplicando urls */
+		add_action('init', array($this,'agenda_flush_rewrite_rules'));
+		/* redirecionando template */
+		add_action("template_redirect",array($this,'agenda_templates'));
+		/* passando variaveis para o loop de agenda */
+		add_filter('query_vars', array($this,'agenda_queryvars'));
 	}
 
 
 	function install() {
-		
+
 		$labels = array(
 		    'name' => __('Agenda', 'Adicionar novo evento'),
 		    'singular_name' => __('Agenda', 'Evento'),
@@ -67,10 +76,10 @@ class WPAgenda {
 		    'parent_item_colon' => '',
 		    'menu_name' => 'Agenda'
 
-  		);
-		
-		
-		register_post_type($this->name,array(
+		    );
+
+
+		    register_post_type($this->name,array(
 		    'label' => 'Agenda',
 		    'public' => true,
 		    'publicly_queryable' => true,
@@ -84,11 +93,11 @@ class WPAgenda {
 		    'menu_position' => null,
 			'menu_icon' => PLUGIN_PATH.'/img/calendar.png',
 		    'supports' => array('title','editor', 'thumbnail','excerpt')
-		));
+		    ));
 	}
 	function print_boxes() {
-		add_meta_box('wp-agenda-date', __('Data e horário'), array($this,'print_date_box'), 'WPAgenda');
-		add_meta_box('wp-agenda-local', __('Local'), array($this,'print_local_box'), 'WPAgenda');
+		add_meta_box('wp-agenda-date', __('Data e horário'), array($this,'print_date_box'), $this->name);
+		add_meta_box('wp-agenda-local', __('Local'), array($this,'print_local_box'), $this->name);
 	}
 	function print_date_box() {
 		global $post;
@@ -97,31 +106,33 @@ class WPAgenda {
 		$end_date = get_post_meta($post_id, 'end-date', true);
 		$start_time = get_post_meta($post_id, 'start-time', true);
 		$end_time = get_post_meta($post_id, 'end-time', true);
-		
+
 		echo '<fieldset>';
-		echo '<label for="start-date">' . __("Começa em:", 'WPAgenda' ) . '</label> ';
-  		echo '<input class="date" type="text" id="start-date" name="start-date" value="'.$start_date.'" size="25" />';
-  		echo '<label for="start-time">' . __("Horário de início:", 'WPAgenda' ) . '</label> ';
-  		echo '<input type="text" name="start-time" value="'.$start_time.'" />';
-  		echo '</fieldset>';
+		echo '<label for="start-date">' . __("Começa em:", 'agenda' ) . '</label> ';
+		echo '<input class="date" type="text" id="start-date" name="start-date" value="'.$start_date.'" size="25" />';
+		echo '<label for="start-time">' . __("Horário de início:", 'agenda' ) . '</label> ';
+		echo '<input type="text" name="start-time" value="'.$start_time.'" />';
+		echo '<span>Ex: 14:24</span>';
+		echo '</fieldset>';
 		echo '<fieldset>';
-  		echo '<label for="end-date">' . __("Termina em:", 'WPAgenda' ) . '</label> ';
-  		echo '<input class="date" type="text" id="end-date" name="end-date" value="'.$end_date.'" size="25" />';
-  		echo '<label for="end-time">' . __("Horário de Término:", 'WPAgenda' ) . '</label> ';
-  		echo '<input type="text" name="end-time" value="'.$end_time.'" />';
-  		echo '';
-  		echo '</fieldset>';
-  		
+		echo '<label for="end-date">' . __("Termina em:", 'agenda' ) . '</label> ';
+		echo '<input class="date" type="text" id="end-date" name="end-date" value="'.$end_date.'" size="25" />';
+		echo '<label for="end-time">' . __("Horário de Término:", 'agenda' ) . '</label> ';
+		echo '<input type="text" name="end-time" value="'.$end_time.'" />';
+		echo '<span>Ex: 12:24</span>';
+		echo '';
+		echo '</fieldset>';
+
 	}
-	
+
 	function print_local_box() {
 		global $post;
 		$post_id = $post->ID;
 		$local = get_post_meta($post_id, 'local', true);
-		echo '<label for="local">' . __("Endereço do evento:", 'WPAgenda' ) . '</label> ';
-  		echo '<textarea class="local" type="text" id="local" name="local">'.$local.'</textarea>';
+		echo '<label for="local">' . __("Endereço do evento:", 'agenda' ) . '</label> ';
+		echo '<textarea class="local" type="text" id="local" name="local">'.$local.'</textarea>';
 	}
-	
+
 	function save_metadata($id) {
 		$metadata = Array();
 		$metadata['start-date'] = $_POST['start-date'];
@@ -132,11 +143,50 @@ class WPAgenda {
 		foreach($metadata as $key => $data) {
 			update_post_meta($id, $key, $data);
 		}
-		
+
 		return $metadata;
 	}
-	
+
+	function agenda_add_rewrite_rules($wp_rewrite) {
+		$new_rules = array(
+ 	'agenda/(.+?)/?$' => 'index.php?agenda=' .
+		$wp_rewrite->preg_index(1) );
+
+		$new_rules2 = array(
+ 	'agenda/?$' => 'index.php?agenda=all');
+
+		$wp_rewrite->rules = $new_rules + $new_rules2 + $wp_rewrite->rules;
+	}
+
+	function agenda_flush_rewrite_rules() {
+		global $wp_rewrite;
+		$wp_rewrite->flush_rules();
+	}
+
+	function agenda_templates() {
+
+		if ( $_GET['agenda'] ) {
+			if (file_exists(TEMPLATEPATH . '/agenda.php')) {
+				include(TEMPLATEPATH . '/agenda.php');
+				exit;
+			} else {
+				include(TEMPLATEPATH . '/index.php');
+				exit;
+			}
+		} else {
+
+
+		}
+
+	}
+
+	function agenda_queryvars($qvars) {
+		$qvars[] = 'WPAgenda';
+		return $qvars;
+	}
+
 }
 // end WPAgenda Class
+
 
 $agenda = new WPAgenda();
