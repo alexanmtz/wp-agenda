@@ -96,5 +96,4 @@ jQuery(document).ready(function() {
     };
   } */
   jQuery('#wp-agenda-calendar').fullCalendar(agenda_options);
-	      
 });

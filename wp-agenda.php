@@ -15,6 +15,7 @@ class Agenda {
 	var $name = 'agenda';
 
 	function __construct() {
+		$this->register_admin_scripts();
 		$this->register_public_scripts();
 		$this->register_actions();
 		$this->register_ajax_actions();
@@ -168,6 +169,7 @@ class Agenda {
 		$post_id = $post->ID;
 		$local = get_post_meta($post_id, 'local', true);
 		echo '<label for="local">' . __("Event Address:", 'agenda' ) . '</label> ';
+		echo '<label for="local">' . __("Endereço do evento:", 'agenda' ) . '</label> ';
 		echo '<textarea class="local" type="text" id="local" name="local">'.$local.'</textarea>';
 	}
 
