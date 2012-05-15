@@ -1,67 +1,56 @@
 === Plugin Name ===
-Contributors: markjaquith, mdawaffe (this should be a list of wordpress.org userid's)
-Donate link: http://example.com/
-Tags: comments, spam
-Requires at least: 2.0.2
-Tested up to: 2.1
-Stable tag: 4.3
+Contributors: alexanmtz
+Donate link: http://www.alexandremagno.net
+Tags: agenda, events, schedule, meeting, shows
+Tested up to: "trunk"
+Requires at least: 2.9
+Tested up to: 3.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-This is a simple (for a while) event management to display a full calendar in your page with a easy and wordpress way to manage events.
+A complete events manager for wordpress using the post type api, completely flexible, customizable and using the great jQuery plugin Full Calendar (http://arshaw.com/fullcalendar/), that means that you have a great events management with a rich interface for your blog and/or site users.
 
 == Description ==
 
-This is the long description.  No limit, and you can use Markdown (as well as in the following sections).
+Once installed, it will be possible create a event in a section called "Agenda". You will see a page like your seeing any post. But with this plugin, you will save information about start date, end date and about hours that start and ends. I hope I can make a integration with facebook later!
 
-For backwards compatibility, if this section is missing, the full length of the short description will be used, and
-Markdown parsed.
+Well, you can have a fully customizable template just adding a agenda.php file as the main template, and then just insert this markup to make it works:
 
-A few notes about the sections above:
+<div id="wp-agenda-calendar"></div>
 
-*   "Contributors" is a comma separated list of wp.org/wp-plugins.org usernames
-*   "Tags" is a comma separated list of tags that apply to the plugin
-*   "Requires at least" is the lowest version that the plugin will work on
-*   "Tested up to" is the highest version that you've *successfully used to test the plugin*. Note that it might work on
-higher versions... this is just the highest one you've verified.
-*   Stable tag should indicate the Subversion "tag" of the latest stable version, or "trunk," if you use `/trunk/` for
-stable.
+This is the plugin features and that makes different of other ones around:
 
-    Note that the `readme.txt` of the stable tag is the one that is considered the defining one for the plugin, so
-if the `/trunk/readme.txt` file says that the stable tag is `4.3`, then it is `/tags/4.3/readme.txt` that'll be used
-for displaying information about the plugin.  In this situation, the only thing considered from the trunk `readme.txt`
-is the stable tag pointer.  Thus, if you develop in trunk, you can update the trunk `readme.txt` to reflect changes in
-your in-development version, without having that information incorrectly disclosed about the current stable version
-that lacks those changes -- as long as the trunk's `readme.txt` points to the correct stable tag.
+* Making a event manager of a wordpress way, the right way, using post-type to have fully customization.
+* A rich UI for the calendar
+* Easy event manager, with all the post features, as featured image
 
-    If no stable tag is provided, it is assumed that trunk is stable, but you should specify "trunk" if that's where
-you put the stable version, in order to eliminate any doubt.
 
 == Installation ==
 
 This section describes how to install the plugin and get it working.
 
+Another way is access the github page and make a download: https://github.com/alexanmtz/wp-agenda
+
+[WordPress](http://github.com/ "Github wp-agenda site")
+
 e.g.
 
-1. Upload `plugin-name.php` to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Place `<?php do_action('plugin_name_hook'); ?>` in your templates
+1. Upload `wp-agenda` to the `/wp-content/plugins/` directory
+2. Activate the plugin through the 'Plugins' menu in WordPress
+3. Just go to agenda main page and start to create events!
+
+Once the event is created, you can acessing http://yoursite/?agenda=show for see the full calendar of events, or even http://yoursite/?post_type=agenda for see the events lists.
 
 == Frequently Asked Questions ==
 
-= What's the different from others great Agenda Plugins out there? =
-
-Well, my motivation to write this plugin is to use the new post-type introduced at version 3.0. This way I could use the wordpress post system to handler events as posts, and this way be categorized and treated as posts. Another thing is that I was wishing some flexible with the layout, so you can use a agenda template in your theme and it will be loaded!.
-
-= What about foo bar? =
-
-Answer to foo bar dilemma.
-
 == Screenshots ==
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the directory of the stable readme.txt, so in this case, `/tags/4.3/screenshot-1.png` (or jpg, jpeg, gif)
-2. This is the second screen shot
+1. `/trunk/screenshot1.png`
+1. `/trunk/screenshot2.png`
+1. `/trunk/screenshot3.png`
+1. `/trunk/screenshot4.png`
+1. `/trunk/screenshot5.png`
+1. `/trunk/screenshot6.png`
 
 == Changelog ==
 
@@ -69,44 +58,8 @@ the directory of the stable readme.txt, so in this case, `/tags/4.3/screenshot-1
 * A change since the previous version.
 * Another change.
 
-= 0.5 =
-* List versions from most recent at top to oldest at bottom.
-
-== Upgrade Notice ==
-
-= 1.0 =
-Upgrade notices describe the reason a user should upgrade.  No more than 300 characters.
-
-= 0.5 =
-This version fixes a security related bug.  Upgrade immediately.
-
 == Arbitrary section ==
 
 You may provide arbitrary sections, in the same format as the ones above.  This may be of use for extremely complicated
 plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or
 "installation."  Arbitrary sections will be shown below the built-in sections outlined above.
-
-== A brief Markdown Example ==
-
-Ordered list:
-
-1. Some feature
-1. Another feature
-1. Something else about the plugin
-
-Unordered list:
-
-* something
-* something else
-* third thing
-
-Here's a link to [WordPress](http://wordpress.org/ "Your favorite software") and one to [Markdown's Syntax Documentation][markdown syntax].
-Titles are optional, naturally.
-
-[markdown syntax]: http://daringfireball.net/projects/markdown/syntax
-            "Markdown is what the parser uses to process much of the readme file"
-
-Markdown uses email style notation for blockquotes and I've been told:
-> Asterisks for *emphasis*. Double it up  for **strong**.
-
-`<?php code(); // goes in backticks ?>`
