@@ -8,11 +8,13 @@ Tested up to: 3.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-A complete events manager for wordpress using the post type api, completely flexible, customizable and using the great jQuery plugin [Full Calendar](http://arshaw.com/fullcalendar/ "Full Calendar website"), that means that you have a great events management with a rich interface for your blog and/or site users.
+A complete events manager for wordpress using the post type api, completely flexible, customizable and using the great jQuery plugin Full Calendar, that means that you have a great events management with a rich interface for your blog and/or site users.
 
 == Description ==
 
 Once installed, it will be possible create a event in a section called "Agenda". You will see a page like your seeing any post. But with this plugin, you will save information about start date, end date and about hours that start and ends. I hope I can make a integration with facebook later!
+
+Thanks for [Full Calendar](http://arshaw.com/fullcalendar/ "Full Calendar") for the great plugin!
 
 Well, you can have a fully customizable template just adding a agenda.php file as the main template, and then just insert this markup to make it works:
 
@@ -28,7 +30,7 @@ This is the plugin features and that makes different of other ones around:
 
 This section describes how to install the plugin and get it working.
 
-Another way is access the github page and make a download: [Github page](http://github.com/alexanmtz/wp-agenda "Github wp-agenda site")
+Another way is access the github page and make a download: http://github.com/alexanmtz/wp-agenda
 
 e.g.
 
@@ -46,12 +48,6 @@ Once the event is created, you can acessing http://yoursite/?agenda=show for see
 4. `/trunk/screenshot4.png`
 5. `/trunk/screenshot5.png`
 6. `/trunk/screenshot6.png`
-=======
-e.g.
-
-1. Upload `plugin-name.php` to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Place `<?php do_action('plugin_name_hook'); ?>` in your templates
 
 == Frequently Asked Questions ==
 
