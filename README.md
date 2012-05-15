@@ -8,7 +8,7 @@ Tested up to: 3.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-A complete events manager for wordpress using the post type api, completely flexible, customizable and using the great jQuery plugin Full Calendar (http://arshaw.com/fullcalendar/), that means that you have a great events management with a rich interface for your blog and/or site users.
+A complete events manager for wordpress using the post type api, completely flexible, customizable and using the great jQuery plugin [Full Calendar](http://arshaw.com/fullcalendar/ "Full Calendar website"), that means that you have a great events management with a rich interface for your blog and/or site users.
 
 == Description ==
 
