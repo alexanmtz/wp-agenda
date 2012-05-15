@@ -24,14 +24,11 @@ This is the plugin features and that makes different of other ones around:
 * A rich UI for the calendar
 * Easy event manager, with all the post features, as featured image
 
-
 == Installation ==
 
 This section describes how to install the plugin and get it working.
 
-Another way is access the github page and make a download: https://github.com/alexanmtz/wp-agenda
-
-[WordPress](http://github.com/ "Github wp-agenda site")
+Another way is access the github page and make a download: [Github page](http://github.com/alexanmtz/wp-agenda "Github wp-agenda site")
 
 e.g.
 
@@ -41,25 +38,28 @@ e.g.
 
 Once the event is created, you can acessing http://yoursite/?agenda=show for see the full calendar of events, or even http://yoursite/?post_type=agenda for see the events lists.
 
-== Frequently Asked Questions ==
-
 == Screenshots ==
 
 1. `/trunk/screenshot1.png`
-1. `/trunk/screenshot2.png`
-1. `/trunk/screenshot3.png`
-1. `/trunk/screenshot4.png`
-1. `/trunk/screenshot5.png`
-1. `/trunk/screenshot6.png`
+2. `/trunk/screenshot2.png`
+3. `/trunk/screenshot3.png`
+4. `/trunk/screenshot4.png`
+5. `/trunk/screenshot5.png`
+6. `/trunk/screenshot6.png`
+=======
+e.g.
+
+1. Upload `plugin-name.php` to the `/wp-content/plugins/` directory
+1. Activate the plugin through the 'Plugins' menu in WordPress
+1. Place `<?php do_action('plugin_name_hook'); ?>` in your templates
+
+== Frequently Asked Questions ==
+
+= What's the different from others great Agenda Plugins out there? =
+
+Well, my motivation to write this plugin is to use the new post-type introduced at version 3.0. This way I could use the wordpress post system to handler events as posts, and this way be categorized and treated as posts. Another thing is that I was wishing some flexible with the layout, so you can use a agenda template in your theme and it will be loaded!.
 
 == Changelog ==
 
 = 1.0 =
-* A change since the previous version.
-* Another change.
-
-== Arbitrary section ==
-
-You may provide arbitrary sections, in the same format as the ones above.  This may be of use for extremely complicated
-plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or
-"installation."  Arbitrary sections will be shown below the built-in sections outlined above.
+* first release. Rewriting the old wp-agenda from funarte website to a new post-type
