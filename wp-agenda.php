@@ -45,7 +45,7 @@ class Agenda {
 		wp_enqueue_script('jgrowl', PLUGIN_PATH.'/js/jquery.jgrowl_compressed.js', array('jquery'));
 		wp_enqueue_script('tooltip', PLUGIN_PATH.'/js/jquery.tooltip.pack.js', array('jquery'));
 		wp_enqueue_script( 'fullcalendar', PLUGIN_PATH.'/js/fullcalendar.js', array('jquery','jquery-ui-core','jquery-ui-draggable','jquery-ui-resizable','tooltip'));
-		wp_enqueue_script( 'agenda-locale', PLUGIN_PATH.'/js/agenda-locale.js', array('fullcalendar'));
+		//wp_enqueue_script( 'agenda-locale', PLUGIN_PATH.'/js/agenda-locale.js', array('fullcalendar'));
 		wp_enqueue_script( 'agenda_main', PLUGIN_PATH.'/js/agenda_main.js', array('fullcalendar', 'tooltip'));
 	}
 	function register_actions() {
@@ -100,16 +100,16 @@ class Agenda {
 	function install() {
 
 		$labels = array(
-		    'name' => __('Agenda', 'Adicionar novo evento'),
-		    'singular_name' => __('Agenda', 'Evento'),
-		    'add_new' => __('Adicionar novo', 'Evento'),
-		    'add_new_item' => __('Adicionar novo evento'),
-		    'edit_item' => __('Editar Evento'),
-		    'new_item' => __('Novo Evento'),
-		    'view_item' => __('Ver Evento'),
-		    'search_items' => __('Buscar Eventos'),
-		    'not_found' =>  __('Nenhum evento encontrado'),
-		    'not_found_in_trash' => __('Nenhum evento na lixeira'), 
+		    'name' => __('Agenda', 'Add new event'),
+		    'singular_name' => __('Agenda', 'Event'),
+		    'add_new' => __('Add New', 'Event'),
+		    'add_new_item' => __('Add new event'),
+		    'edit_item' => __('Edit Event'),
+		    'new_item' => __('New Event'),
+		    'view_item' => __('See Event'),
+		    'search_items' => __('Search Events'),
+		    'not_found' =>  __('no events found'),
+		    'not_found_in_trash' => __('no events in trash'), 
 		    'parent_item_colon' => '',
 		    'menu_name' => 'Agenda'
 
@@ -134,8 +134,8 @@ class Agenda {
 		    ));
 	}
 	function print_boxes() {
-		add_meta_box('wp-agenda-date', __('Data e horário'), array($this,'print_date_box'), $this->name);
-		add_meta_box('wp-agenda-local', __('Local'), array($this,'print_local_box'), $this->name);
+		add_meta_box('wp-agenda-date', __('When'), array($this,'print_date_box'), $this->name);
+		add_meta_box('wp-agenda-local', __('Where'), array($this,'print_local_box'), $this->name);
 	}
 	function print_date_box() {
 		global $post;
@@ -146,16 +146,16 @@ class Agenda {
 		$end_time = get_post_meta($post_id, 'end-time', true);
 		
 		echo '<fieldset>';
-		echo '<label for="start-date">' . __("Começa em:", 'agenda' ) . '</label> ';
+		echo '<label for="start-date">' . __("Starts in:", 'agenda' ) . '</label> ';
 		echo '<input class="date" type="text" id="start-date" name="start-date" value="'.$start_date.'" size="25" />';
-		echo '<label for="start-time">' . __("Horário de início:", 'agenda' ) . '</label> ';
+		echo '<label for="start-time">' . __("Start Hour:", 'agenda' ) . '</label> ';
 		echo '<input type="text" name="start-time" value="'.$start_time.'" />';
 		echo '<span>Ex: 14:24</span>';
 		echo '</fieldset>';
 		echo '<fieldset>';
-		echo '<label for="end-date">' . __("Termina em:", 'agenda' ) . '</label> ';
+		echo '<label for="end-date">' . __("Ends in:", 'agenda' ) . '</label> ';
 		echo '<input class="date" type="text" id="end-date" name="end-date" value="'.$end_date.'" size="25" />';
-		echo '<label for="end-time">' . __("Horário de Término:", 'agenda' ) . '</label> ';
+		echo '<label for="end-time">' . __("Finish time:", 'agenda' ) . '</label> ';
 		echo '<input type="text" name="end-time" value="'.$end_time.'" />';
 		echo '<span>Ex: 12:24</span>';
 		echo '';
@@ -167,7 +167,7 @@ class Agenda {
 		global $post;
 		$post_id = $post->ID;
 		$local = get_post_meta($post_id, 'local', true);
-		echo '<label for="local">' . __("Endereço do evento:", 'agenda' ) . '</label> ';
+		echo '<label for="local">' . __("Event Address:", 'agenda' ) . '</label> ';
 		echo '<textarea class="local" type="text" id="local" name="local">'.$local.'</textarea>';
 	}
 
@@ -192,9 +192,9 @@ class Agenda {
 	}
 
 	function agenda_add_rewrite_rules($wp_rewrite) {
-		$new_rules = array(
- 	'agenda/?$' => 'index.php?agenda=all');
-
+		$new_rules = Array();
+ 	  $new_rules['agenda/?$'] = 'index.php?post_type=agenda';
+    $new_rules['agenda/?$'] = 'index.php?agenda=show';
 		$wp_rewrite->rules = $new_rules + $wp_rewrite->rules;
 	}
 
@@ -205,7 +205,7 @@ class Agenda {
 
 	function agenda_templates() {
 
-		if ( $_GET['agenda']== 'all' ) {
+		if ( $_GET['agenda'] == 'show' ) {
 			if (file_exists(TEMPLATEPATH . '/agenda.php')) {
 				include(TEMPLATEPATH . '/agenda.php');
 				exit;

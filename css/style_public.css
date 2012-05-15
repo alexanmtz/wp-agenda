@@ -6,13 +6,13 @@
 .loading {
 	display: inline-block;
 	width: 80px;
-	heith: 30px;
+	height: 30px;
 	text-align: center;
 }
 
 .fc-event a {
-  background-color: #3e7341;
-  color: white;
+  background-color: white;
+  color: gray;
 }
 
 .fc-event a:hover {

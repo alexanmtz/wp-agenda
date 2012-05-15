@@ -2,13 +2,13 @@
  * Configuracoes de linguagem da agenda
  *
  */
-
-var agenda_locale = {
+var agenda_locale = [];
+agenda_locale['pt-br'] = {
 	monthNames: ['Janeiro','Fevereiro','Mar&ccedil;o','Abril','Maio','Junho','Julho','Agosto',
 	'Setembro','Outubro','Novembro','Dezembro'
 	],
 	monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
-	dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','S&aacute;bado'],
+	dayNames: ['Domingo','Segunda','Terï¿½a','Quarta','Quinta','Sexta','S&aacute;bado'],
 	dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sab'],
 	header: { left:'prev', center:'title', right:'next' },
 	buttonText: {
