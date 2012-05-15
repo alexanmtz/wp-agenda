@@ -43,12 +43,14 @@ Once the event is created, you can acessing http://yoursite/?agenda=show for see
 
 == Screenshots ==
 
-1. `/trunk/screenshot1.png`
-2. `/trunk/screenshot2.png`
-3. `/trunk/screenshot3.png`
-4. `/trunk/screenshot4.png`
-5. `/trunk/screenshot5.png`
-6. `/trunk/screenshot6.png`
+1. Full Calendar
+2. Listing events created
+3. Management time
+4. Management time
+5. Management time
+6. New event
+7. New option at admin
+8. The calendar page
 
 == Frequently Asked Questions ==
 
