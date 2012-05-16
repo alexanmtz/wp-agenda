@@ -85,13 +85,16 @@ class Agenda {
 	function get_agenda_events() {
 		global $wpdb;
 		$events = get_posts(array('post_type'=>'agenda', 'numberposts' => -1), ARRAY_A);
+		if( current_theme_supports( 'post-thumbnail' ) ) {
+			$thumb = get_the_post_thumbnail( $event->ID, array(100,100) );
+		}
 		
 		foreach($events as $event) {
 			$event->start_date = get_post_meta($event->ID, 'start-date');
 			$event->end_date = get_post_meta($event->ID, 'end-date');
 			$event->start_time = get_post_meta($event->ID, 'start-time');
 			$event->end_time = get_post_meta($event->ID, 'end-time');
-			$event->thumbnail = get_the_post_thumbnail( $event->ID, array(100,100) );
+			$event->thumbnail = $thumb;
 		}
 		$json = json_encode($events);
 		echo $json;
