@@ -2,7 +2,7 @@
 Contributors: alexanmtz
 Donate link: http://www.alexandremagno.net
 Tags: agenda, events, schedule, meeting, shows
-tag: 1.1
+tag: 1.2
 Requires at least: 2.9
 Tested up to: 3.3
 License: GPLv2 or later
@@ -62,6 +62,9 @@ Once the event is created, you can acessing http://yoursite/?agenda for see the 
 Well, my motivation to write this plugin is to use the new post-type introduced at version 3.0. This way I could use the wordpress post system to handler events as posts, and this way be categorized and treated as posts. Another thing is that I was wishing some flexible with the layout, so you can use a agenda template in your theme and it will be loaded!.
 
 == Changelog ==
+
+= 1.2 =
+* Testing wordpress download release versions
 
 = 1.1 =
 * Updating documentation and reviewing ajax actions
