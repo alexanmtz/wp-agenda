@@ -76,8 +76,8 @@ class Agenda {
 	}
 	
 	function register_ajax_actions() {
-		add_action('wp_ajax_nopriv_agenda_events', array($this,'get_agenda_events'));
 		add_action('wp_ajax_agenda_events', array($this,'get_agenda_events'));
+    add_action('wp_ajax_nopriv_agenda_events', array($this,'get_agenda_events'));
 	}
 	
 	

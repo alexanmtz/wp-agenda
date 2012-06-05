@@ -2,7 +2,7 @@
 Contributors: alexanmtz
 Donate link: http://www.alexandremagno.net
 Tags: agenda, events, schedule, meeting, shows
-tag: 1.0
+tag: 1.1
 Requires at least: 2.9
 Tested up to: 3.3
 License: GPLv2 or later
@@ -19,6 +19,10 @@ Thanks for [Full Calendar](http://arshaw.com/fullcalendar/ "Full Calendar") for 
 Well, you can have a fully customizable template just adding a agenda.php file as the main template, and then just insert this markup to make it works:
 
 <div id="wp-agenda-calendar"></div>
+
+Now you can access the calendar at http://yourwordpresspage/?agenda
+
+You can create a menu widget with the above link to calendar, but you can use as you prefer.
 
 This is the plugin features and that makes different of other ones around:
 
@@ -38,7 +42,7 @@ e.g.
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Just go to agenda main page and start to create events!
 
-Once the event is created, you can acessing http://yoursite/?agenda=show for see the full calendar of events, or even http://yoursite/?post_type=agenda for see the events lists.
+Once the event is created, you can acessing http://yoursite/?agenda for see the full calendar of events, or even http://yoursite/?post_type=agenda for see the events lists.
 
 == Screenshots ==
 
@@ -58,6 +62,9 @@ Once the event is created, you can acessing http://yoursite/?agenda=show for see
 Well, my motivation to write this plugin is to use the new post-type introduced at version 3.0. This way I could use the wordpress post system to handler events as posts, and this way be categorized and treated as posts. Another thing is that I was wishing some flexible with the layout, so you can use a agenda template in your theme and it will be loaded!.
 
 == Changelog ==
+
+= 1.1 =
+* Updating documentation and reviewing ajax actions
 
 = 1.0 =
 * first release. Rewriting the old wp-agenda from funarte website to a new post-type
