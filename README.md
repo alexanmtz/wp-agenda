@@ -2,7 +2,7 @@
 Contributors: alexanmtz
 Donate link: http://www.alexandremagno.net
 Tags: agenda, events, schedule, meeting, shows
-tag: 1.4
+tag: 1.5
 Requires at least: 2.9
 Tested up to: 3.3
 License: GPLv2 or later

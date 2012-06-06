@@ -44,7 +44,6 @@ jQuery(document).ready(function() {
         dataType: 'json',
         data: {action: 'agenda_events'},
         success: function(results) {
-          console.info(results);
           events = [];
           for (result in results) {
             events.push({
