@@ -8,7 +8,7 @@ agenda_locale['pt-br'] = {
 	'Setembro','Outubro','Novembro','Dezembro'
 	],
 	monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
-	dayNames: ['Domingo','Segunda','Ter�a','Quarta','Quinta','Sexta','S&aacute;bado'],
+	dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','S&aacute;bado'],
 	dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sab'],
 	header: { left:'prev', center:'title', right:'next' },
 	buttonText: {

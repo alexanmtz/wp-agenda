@@ -16,7 +16,7 @@ var DateConvert = {
 	toObject: function(date, time) {
 		var dateArray = date.split('/');
 		var timeArray = time.split(':');
-		var DateObject = new Date(dateArray[2], dateArray[1]-1, dateArray[0], timeArray[0], timeArray[1]);
+		var DateObject = new Date(dateArray[2], dateArray[0]-1, dateArray[1], timeArray[0], timeArray[1]);
 		return DateObject;
 	}
 }
@@ -44,6 +44,7 @@ jQuery(document).ready(function() {
         dataType: 'json',
         data: {action: 'agenda_events'},
         success: function(results) {
+          console.info(results);
           events = [];
           for (result in results) {
             events.push({

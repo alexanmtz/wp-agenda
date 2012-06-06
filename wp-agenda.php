@@ -3,7 +3,7 @@
  Plugin Name: WP Agenda
  Plugin URI: http://www.alexandremagno.net/projects/wp-agenda
  Description: Manage events with wordpress
- Version: 1.2
+ Version: 1.4
  Author: Alexandre Magno <alexanmtz@gmail.com>
  Author URI: http://blog.alexandremagno.net
  */
