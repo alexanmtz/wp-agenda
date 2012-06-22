@@ -10,11 +10,15 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 A complete events manager for wordpress using the post type api, completely flexible with rich UI.
 
+Checkout a great tutorial about the plugin instructions [wp-agenda tutorial at my blog](http://blog.alexandremagno.net/en/2012/06/making-wordpress-events-with-wp-agenda/ "Making wordpress events with wp-agenda") for the great plugin!
+
+Checkout a great tutorial about the plugin instructions [wp-agenda tutorial at my blog](http://blog.alexandremagno.net/en/2012/06/making-wordpress-events-with-wp-agenda/ "Making wordpress events with wp-agenda") for the great plugin!
+
 == Description ==
 
 Once installed, it will be possible create a event in a section called "Agenda". You will see a page like your seeing any post. But with this plugin, you will save information about start date, end date and about hours that start and ends. I hope I can make a integration with facebook later!
 
-Thanks for [Full Calendar](http://arshaw.com/fullcalendar/ "Full Calendar") for the great plugin!
+Thanks for [Full Calendar](http://arshaw.com/fullcalendar/ "wp-agenda tutorial at my blog") for the great plugin!
 
 You can check a full tutorial in the post http://blog.alexandremagno.net/2012/06/
 
@@ -34,6 +38,8 @@ This is the plugin features and that makes different of other ones around:
 
 == Installation ==
 
+Checkout a great tutorial about the plugin instructions [wp-agenda tutorial at my blog](http://blog.alexandremagno.net/en/2012/06/making-wordpress-events-with-wp-agenda/ "Making wordpress events with wp-agenda") for the great plugin!
+
 This section describes how to install the plugin and get it working.
 
 Another way is access the github page and make a download: http://github.com/alexanmtz/wp-agenda
@@ -45,6 +51,8 @@ e.g.
 3. Just go to agenda main page and start to create events!
 
 Once the event is created, you can acessing http://yoursite/?agenda for see the full calendar of events, or even http://yoursite/?post_type=agenda for see the events lists.
+
+Checkout a great tutorial about the plugin instructions [Full Calendar](http://blog.alexandremagno.net/en/2012/06/making-wordpress-events-with-wp-agenda/ "Making wordpress events with wp-agenda") for the great plugin!
 
 == Screenshots ==
 

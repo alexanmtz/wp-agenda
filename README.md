@@ -10,6 +10,8 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 A complete events manager for wordpress using the post type api, completely flexible with rich UI.
 
+Checkout a great tutorial about the plugin instructions [wp-agenda tutorial at my blog](http://blog.alexandremagno.net/en/2012/06/making-wordpress-events-with-wp-agenda/ "Making wordpress events with wp-agenda") for the great plugin!
+
 ### Description ###
 
 Once installed, it will be possible create a event in a section called "Agenda". You will see a page like your seeing any post. But with this plugin, you will save information about start date, end date and about hours that start and ends. I hope I can make a integration with facebook later!
