@@ -20,7 +20,7 @@ Once installed, it will be possible create a event in a section called "Agenda".
 
 Thanks for [Full Calendar](http://arshaw.com/fullcalendar/ "wp-agenda tutorial at my blog") for the great plugin!
 
-You can check a full tutorial in the post http://blog.alexandremagno.net/2012/06/
+You can check a full tutorial in the post http://blog.alexandremagno.net/en/2012/06/making-wordpress-events-with-wp-agenda/
 
 Well, you can have a fully customizable template just adding a agenda.php file in the main template, and then just insert this markup to make it works:
 
